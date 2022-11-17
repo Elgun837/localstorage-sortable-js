@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js" integrity="sha512-d+dtcSjz831KbYcB3pS7cd3cqlaZ/gbbnZWC4KeLM8AToNtm83Rbc5au5k3bFBh6EwlphOGJtj7oDg6k+NGbPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="item">
+            <span class="text"> Sortable list 1</span>
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+        </div>
+        <div class="item">
+            <span class="text"> Sortable list 2</span>
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="item">
+            <span class="text"> Sortable list 3</span>
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="item">
+            <span class="text"> Sortable list 4</span>
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="item">
+            <span class="text"> Sortable list 5</span>
+            <i class="fas fa-bars"></i>
+        </div>
+       
+        <div class="item">
+            <span class="text"> Sortable list 6</span>
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+    <script>
+        var list = document.querySelector(".container");
+        Sortable.create(list, {
+        group: "Sortable js localstorage",
+        options: {
+          animation: 500,
+          sort: true,
+          filter: ".sortable-disabled",
+          chosenClass: "active"
+        },
+        store: {
+         
+          get: function(sortable) {
+            var order = localStorage.getItem(sortable.options.group.name);
+            return order ? order.split("|") : [];
+          },
+          set: function(sortable) {
+            var order = sortable.toArray();
+            localStorage.setItem(sortable.options.group.name, order.join("|"));
+            console.log(sortable.options.group.name);
+          }
+        }
+      });
+    </script>
+</body>
+</html>
